@@ -1,84 +1,44 @@
-const msgEl = document.getElementById('msg');
+const days = document.getElementById('days');
+const hours = document.getElementById('hours');
+const minutes = document.getElementById('minutes');
+const seconds = document.getElementById('seconds');
+const year = document.getElementById('year');
+const countdown = document.getElementById('countdown');
+const loading = document.getElementById('loading');
 
-const randomNum = getRandomNumber();
+// Current year
+const currentYear = new Date().getFullYear();
 
-console.log('Number:', randomNum);
+const newYearTime = new Date(`Januar 01 ${currentYear + 1} 00:00`);
+console.log(newYearTime);
 
-window.SpeechRecognition =
-  window.SpeechRecognition || window.webkitSpeechRecognition;
 
-let recognition = new window.SpeechRecognition();
+// Set background year
+year.innerText = currentYear + 1;
 
-// Start recognition and game
-recognition.start();
+function updateCountDown() {
+   const currentTime = new Date();
+   const diff = newYearTime - currentTime;
 
-/// Capture user speak
-function onSpeak(e) {
-  const msg = e.results[0][0].transcript;
-  const msgEdited = msg.includes('.') ? msg.slice(0, -1) : msg;
+   // Count days,hours,minutes and seconds
+   const d = Math.floor(diff / 1000 / 60 / 60 / 24);
+   const h = Math.floor(diff / 1000 / 60 / 60) % 24;
+   const m = Math.floor(diff / 1000 / 60) % 60;
+   const s = Math.floor(diff / 1000) % 60;
 
-  writeMessage(msgEdited);
-  checkNumber(msgEdited);
+   // Write time values to DOM
+   days.innerText = d;
+   hours.innerText = h < 10 ? '0' + h : h;
+   minutes.innerText = m < 10 ? '0' + m : m;
+   seconds.innerText = s < 10 ? '0' + s : s;
 }
 
-// Check msg against number
-function checkNumber(msg) {
-  const num = +msg;
 
-  // Check if valid number
-  if (Number.isNaN(num)) {
-    msgEl.innerHTML += '<div>That is not a valid number</div>';
-    return;
-  }
+// Show spinner before countdown
+setTimeout(() => {
+   loading.remove();
+   countdown.style.display = 'flex';
+}, 1000);
 
-  // Check in range
-  if (num > 100 || num < 1) {
-    msgEl.innerHTML += '<div>Number must be between 1 and 100</div>';
-    return;
-  }
-
-  // Check number
-  if (num === randomNum) {
-    document.body.innerHTML = `
-      <h2>Congrats! 🎉</h2>
-      <p> You have guessed the number!</p>
-      <h3> It was ${num} </h3>
-      <button class="play-again" id="play-again">Play Again!</button>
-   `;
-  } else if (num > randomNum) {
-    msgEl.innerHTML += '<div> GO LOWER 👇</div>';
-  } else {
-    msgEl.innerHTML += '<div> GO HIGHER 👆</div>';
-  }
-}
-
-// Write what user speaks
-function writeMessage(msg) {
-  msgEl.innerHTML = `
-   <div>You said:</div>
-      <span class="box">${msg}</span>
-   `;
-}
-
-// Generate random number
-function getRandomNumber() {
-  return Math.floor(Math.random() * 100) + 1;
-}
-
-// Speak result
-recognition.addEventListener('result', onSpeak);
-
-// End SR service
-recognition.addEventListener('end', () => {
-  recognition.start();
-});
-
-document.body.addEventListener('click', e => {
-  if (e.target.id === 'play-again') {
-    window.location.reload();
-  }
-
-  if (e.target.id === 'microphone') {
-    recognition.stop();
-  }
-});
+// Run every second
+setInterval(updateCountDown, 1000);

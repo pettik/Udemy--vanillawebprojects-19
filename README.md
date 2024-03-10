@@ -1,22 +1,23 @@
-# Udemy--vanillawebprojects-19
+# Udemy--vanillawebprojects-18
 
-**Nineteenth** in a series of **20 small projects** in **Vanilla JavaScript** from the [**Udemy course**](https://www.udemy.com/course/web-projects-with-vanilla-javascript/) by author [Brad Traversy](https://www.traversymedia.com/) with this [Brad's original GitHub repository](https://github.com/bradtraversy/vanillawebprojects).
+**The eighteenth** in a series of **20 small projects** in **Vanilla JavaScript** from the [**Udemy course**](https://www.udemy.com/course/web-projects-with-vanilla-javascript/) by author [Brad Traversy](https://www.traversymedia.com/) with this [Brad's original GitHub repository](https://github.com/bradtraversy/vanillawebprojects).
 
-# 19: Speak Number Guessing Game
+# 18: New Year Countdown
 
-Number guessing game where you speak your guess into the microphone using the speech recognition API
+Landing page that counts down from the current date to the next new year
 
 ## Project Specifications
 
-- Display UI directing user to speak guess
-- Implement speech recognition to listen to mic
-- Process user's guess and match
-- Let user know higher, lower, match or not a number
+- Create landing page with HTML/CSS
+- Calculate the days, hours, mins and seconds to the new year
+- Insert values into the DOM
+- Show a spinner right before loading the countdown
+- Show the coming year in the background
 
 ## Original preview
 
 <div style="margin-bottom:30px;text-align:center;display:flex; flex-direction:column;justify-content:center;" >
-    <img src="./img/19_preview.png" alt="Original preview">
+    <img src="./img/18_preview.png" alt="Original preview">
 </div>
 
 ## My solution preview
