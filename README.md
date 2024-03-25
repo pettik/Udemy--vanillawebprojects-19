@@ -29,7 +29,7 @@ Number guessing game where you speak your guess into the microphone using the sp
 
 - same as an original
 
-# 19th of 20 Vanilla Javascript project
+# 19th of 20 Vanilla Javascript projects
 
 | ID | Project | URL Link |
 |---|---|---|
